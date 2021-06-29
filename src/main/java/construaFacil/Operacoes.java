@@ -5,11 +5,6 @@ import java.util.Scanner;
 public class Operacoes {
     Scanner teclado = new Scanner(System.in);
 
-    public int lerIntInput(){
-
-        return teclado.nextInt();
-    }
-
     public String lerStrInput(){
         return teclado.next();
     }
@@ -49,7 +44,7 @@ public class Operacoes {
         return Integer.toString(intN1 * intN2);
     }
 
-    public String dividirDoisNumeros(int intN1, int intN2){
+    public String dividirDoisNumeros(int intN1, int intN2){ //Impedir divisão por zero
         String resultado;
         if (intN2 != 0) {
             resultado = Integer.toString(intN1 / intN2);
@@ -60,11 +55,39 @@ public class Operacoes {
         return resultado;
     }
 
-    public boolean validarStrInput(int intInput){ //Se o input não for entre 1 e 4, retorna false
-        boolean boolResp = true;
-        if (intInput < 1 || intInput> 4){
-            boolResp = false;
+    public boolean validarIntInput(int intInput){ //Se o input não for entre 1 e 4, retorna false
+        return intInput >= 1 && intInput <= 4;
+    }
+
+
+    public boolean validarStrInput(String strInput){ //Tratamento para inputs diferentes de "1", "2", "3" e "4"
+        boolean boolResp;
+        switch (strInput){
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+                boolResp = true;
+                break;
+            default:
+                boolResp = false;
+                break;
         }
         return boolResp;
+    }
+
+    public void loopValidarStrInput(String strInput){ //Tratamento de input de operação inválida
+        while (!validarStrInput(strInput)){
+            System.out.print("***Entrada Inválida*** \nEscolha o cálculo desejado: ");
+            strInput = lerStrInput();
+        }
+    }
+
+    public void loopValidarStrNumInput(String strNum){ //Tratamento de input de número inválido
+        while (!strNum.matches("-?\\d+")){
+            System.out.print("***Entrada Inválida*** \nDigite um número: ");
+            strNum = lerStrInput();
+        }
+
     }
 }

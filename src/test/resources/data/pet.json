@@ -1,0 +1,22 @@
+{
+  "id": 3031,
+  "category": {
+    "id": 1,
+    "name": "cat"
+  },
+  "name": "Esmeralda",
+  "photoUrls": [
+    "string"
+  ],
+  "tags": [
+    {
+      "id": 0,
+      "name": "string"
+    },
+    {
+      "id": 1,
+      "name": "int"
+    }
+  ],
+  "status": "available"
+}

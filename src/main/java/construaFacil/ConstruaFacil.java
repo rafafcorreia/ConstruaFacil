@@ -21,17 +21,19 @@ public class ConstruaFacil {
 
         System.out.print("**********CALCULADORA********** \n(1) Somar \n(2) Subtrair \n(3) Multiplicar " +
                 "\n(4) Dividir \nEscolha o cálculo desejado: ");
-
-        int intInput = operacoes.lerIntInput(); //Recebe input pelo teclado do usuário
-        while (!operacoes.validarStrInput(intInput)) { //Tratamento de input inválido
-            System.out.print("***Entrada Inválida*** \nEscolha o cálculo desejado: ");
-            intInput = operacoes.lerIntInput();
-        }
-
+        String strInput = operacoes.lerStrInput();
+        operacoes.loopValidarStrInput(strInput); //Loop para tratamento de input de operação inválida
+        int intInput = Integer.parseInt(strInput);
         System.out.print("Digite um número: ");
-        int intN1 = operacoes.lerIntInput(); //Recebe input pelo teclado do usuário convertido para int
-        System.out.print("Digite outro número: ");
-        int intN2 = operacoes.lerIntInput(); //Recebe input pelo teclado do usuário convertido para int
+        String strN1 = operacoes.lerStrInput();
+        operacoes.loopValidarStrNumInput(strN1); //Loop para tratamento de input de número inválido
+        int intN1 = Integer.parseInt(strN1);
+        //int intN1 = operacoes.lerIntInput(); //Recebe input pelo teclado do usuário convertido para int
+        System.out.print("Digite um número: ");
+        String strN2 = operacoes.lerStrInput();
+        operacoes.loopValidarStrNumInput(strN2); //Loop para tratamento de input de número inválido
+        int intN2 = Integer.parseInt(strN2);
+        //int intN2 = operacoes.lerIntInput(); //Recebe input pelo teclado do usuário convertido para int
         System.out.println("O resultado da operação é: " + operacoes.seletorOperacao(intInput, intN1, intN2));
     }
 

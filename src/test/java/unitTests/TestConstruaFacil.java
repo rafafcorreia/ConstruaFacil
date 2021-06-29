@@ -64,17 +64,11 @@ public class TestConstruaFacil {
         //Given
         int n1 = 15;
         int n2 = 0;
-        String resultadoEsperado = "Erro: Não pode divisão por zero";
+        String resultadoEsperado = "Erro! Não pode divisão por zero";
         String resultadoObtido;
         //When
         resultadoObtido = operacoes.dividirDoisNumeros(n1, n2);
         //Then
         assertEquals(resultadoObtido, resultadoEsperado);
     }
-
-    @Test
-    public void testarMain(){
-
-    }
-
 }

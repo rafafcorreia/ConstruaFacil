@@ -12,28 +12,24 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.stringContainsInOrder;
 
 public class Pet {
+    Util util = new Util();
     String petId = "3031";
     String jsonBody;
     String urlPet = "https://petstore.swagger.io/v2/pet/";
 
-   /* @Test
+    @Test
     public void suiteDeTestes() throws IOException {
         incluirPet();
         consultarPet();
-        alterarPet();
-        deletarPet();
-    }
-    */
-
-    public String lerJson(String caminhoJson) throws IOException {
-        return new String(Files.readAllBytes(Paths.get(caminhoJson)));
+        //alterarPet();
+        //deletarPet();
     }
 
     //POST
-    @Test(priority = 1)
+    @Test
     public void incluirPet() throws IOException {
         //Given
-        jsonBody = lerJson("src/test/resources/data/pet.json");
+        jsonBody = util.lerJson("src/test/resources/data/pet.json");
         given()
                 .contentType("application/json")
                 .log().all()
@@ -50,11 +46,12 @@ public class Pet {
                 .body("category.name", is("cat"))
                 .body("name", is("Esmeralda"))
                 .body("tags[1].id", is(1))
-                .body("tags[1].name", is("int"));
+                .body("tags[1].name", is("int"))
+        ;
     }
 
     //GET
-    @Test (priority = 2, dependsOnMethods = {"incluirPet"})
+    @Test
     public void consultarPet(){
         given()
                 .contentType("application/json")
@@ -69,12 +66,13 @@ public class Pet {
                 .body("category.name", is("cat"))
                 .body("status", is("available"))
                 .body("tags[1].id", is(1))
-                .body("tags[1].name", is("int"));
+                .body("tags[1].name", is("int"))
+        ;
     }
 
-    @Test (priority = 3, dependsOnMethods = {"consultarPet"})
+    @Test
     public void alterarPet() throws IOException {
-        jsonBody = lerJson("src/test/resources/data/pet2.json");
+        jsonBody = util.lerJson("src/test/resources/data/pet2.json");
 
         given()
                 .contentType("application/json")
@@ -86,10 +84,11 @@ public class Pet {
                 .log().all()
                 .statusCode(200)
                 .body("name", is("Lazuli"))
-                .body("tags[0].name", stringContainsInOrder("Az"));
+                .body("tags[0].name", stringContainsInOrder("Az"))
+        ;
     }
 
-    @Test (priority = 4, dependsOnMethods = {"alterarPet"})
+    @Test
     public void deletarPet(){
         given()
                 .contentType("application/json")
@@ -100,6 +99,7 @@ public class Pet {
                 .log().all()
                 .statusCode(200)
                 .body("code", is(200))
-                .body("message", is(petId));
+                .body("message", is(petId))
+        ;
     }
 }
